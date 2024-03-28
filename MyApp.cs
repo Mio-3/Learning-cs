@@ -1,37 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using Microsoft.VisualBasic;
 
-class MyException: Exception{
-  public MyException(string msg): base(msg){
 
+
+class MyApp {
+  static void Main() {
+    List<double> prices = new List<double>() {53.2,48.2,32.8};
+
+    // SQL
+    // var results = from price in prices
+    //   where price * 1.08 > 50.0
+    //   select price * 1.08;
+
+    // Method
+    var results = prices
+      .Select(n => n * 1.08)
+      .Where(n => n > 50.0);
+   foreach(var result in results){
+    Console.WriteLine(result);
+   }
+
+   
   }
 }
 
 
-class MyApp{
-  static void Div(int a,int b){
-    try {
-      if(b < 0){
-        throw new MyException("not minus");
-      }
-      Console.WriteLine(a/b);
-    } catch(DivideByZeroException e){
-      Console.WriteLine(e.Message);
-    } catch(MyException e){
-      Console.WriteLine(e.Message);
-    } finally{
-      Console.WriteLine(" -- end --");
-    }
-  }
-  
-  static void Main(){
-    Div(10,0);
-    Div(10,-3);
-  }
-}
+
+
 
 
 
